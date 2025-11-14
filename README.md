@@ -32,7 +32,7 @@ Assignment3 - это веб-платформа, которая позволяе�
 ### 1. Клонирование репозитория
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/nurdsaga16/assignment3-backend
 cd project
 ```
 
@@ -46,14 +46,7 @@ CREATE DATABASE assignment3;
 
 ### 3. Настройка переменных окружения
 
-Создайте файл `.env` или установите переменные окружения:
-
-```bash
-export JWT_SECRET_KEY=your-secret-key-here
-export DB_PASSWORD=your-database-password
-```
-
-Или отредактируйте `src/main/resources/application.properties`:
+Отредактируйте `src/main/resources/application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/assignment3
@@ -61,13 +54,6 @@ spring.datasource.username=postgres
 spring.datasource.password=your-password
 
 security.jwt.secret-key=${JWT_SECRET_KEY:your-default-secret-key}
-```
-
-### 4. Запуск приложения
-
-```bash
-mvn clean install
-mvn spring-boot:run
 ```
 
 Приложение будет доступно по адресу: `http://localhost:8080`
@@ -90,7 +76,7 @@ Content-Type: application/json
   "fullName": "Иван Иванов",
   "email": "user@example.com",
   "password": "password123",
-  "role": "DONOR" | "NEEDS_HELP" | "ADMIN"
+  "role": "ROLE_DONOR" | "ROLE_NEEDS_HELP" | "ROLE_ADMIN"
 }
 ```
 
@@ -368,12 +354,6 @@ project/
 - Статистика пожертвований
 - Управление волонтерскими событиями
 - Загрузка изображений и документов
-
-## 🧪 Тестирование
-
-```bash
-mvn test
-```
 
 ## 📄 Лицензия
 
