@@ -31,6 +31,16 @@ public class ProjectController {
         return ResponseEntity.ok(projects);
     }
 
+    @GetMapping("/admin/all")
+    public ResponseEntity<List<ProjectResponse>> getAllProjectsForAdmin() {
+        User currentUser = userService.getCurrentUser();
+        if (currentUser.getRole() != UserRole.ADMIN) {
+            throw new AccessDeniedException("Only administrators can access all projects");
+        }
+        List<ProjectResponse> projects = projectService.getAllProjectsForAdmin();
+        return ResponseEntity.ok(projects);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ProjectResponse> getProjectById(
             @PathVariable("id") Long projectId

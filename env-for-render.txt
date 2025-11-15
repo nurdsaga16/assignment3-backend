@@ -1,0 +1,19 @@
+# Скопируйте содержимое ниже и вставьте в Render.com -> Environment -> "Add from .env"
+# Удалите строки с комментариями (начинающиеся с #) перед вставкой
+
+SPRING_DATASOURCE_URL=jdbc:postgresql://dpg-d4c57r7diees738tt7ag-a.oregon-postgres.render.com:5432/assignment3_eejy
+SPRING_DATASOURCE_USERNAME=assignment3_eejy_user
+SPRING_DATASOURCE_PASSWORD=jIvAFeeO2FSAI9oa14WoAS4bah6LS7Bt
+SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+SPRING_JPA_HIBERNATE_DDL_AUTO=update
+SPRING_JPA_SHOW_SQL=false
+SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=false
+SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+JWT_SECRET_KEY=CHANGE_THIS_TO_A_SECURE_RANDOM_KEY_MINIMUM_32_CHARACTERS_LONG
+APP_IMAGES_BASE_DIR=/app/images
+API_VERSION=/api/v1
+PORT=10000
+SERVER_PORT=10000
+JAVA_OPTS=-Xmx512m -Xms256m
+SPRING_PROFILES_ACTIVE=prod
+

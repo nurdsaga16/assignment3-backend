@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-11-15T10:42:59+0500",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.3.jar, environment: Java 25 (Oracle Corporation)"
+    date = "2025-11-15T10:53:44+0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251023-0518, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class ProjectMapperImpl implements ProjectMapper {
@@ -27,13 +27,13 @@ public class ProjectMapperImpl implements ProjectMapper {
 
         ProjectResponse projectResponse = new ProjectResponse();
 
-        projectResponse.setId( entity.getId() );
-        projectResponse.setTitle( entity.getTitle() );
-        projectResponse.setDescription( entity.getDescription() );
         projectResponse.setAuthor( userMapper.toDto( entity.getAuthor() ) );
         projectResponse.setCategory( categoryMapper.toDto( entity.getCategory() ) );
-        projectResponse.setTargetAmount( entity.getTargetAmount() );
         projectResponse.setCollectedAmount( entity.getCollectedAmount() );
+        projectResponse.setDescription( entity.getDescription() );
+        projectResponse.setId( entity.getId() );
+        projectResponse.setTargetAmount( entity.getTargetAmount() );
+        projectResponse.setTitle( entity.getTitle() );
         projectResponse.setVerified( entity.isVerified() );
 
         projectResponse.setImagePaths( mapImagePaths(entity) );

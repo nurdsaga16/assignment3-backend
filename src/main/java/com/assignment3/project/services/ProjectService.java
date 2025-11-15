@@ -38,6 +38,12 @@ public class ProjectService {
         return projects.stream().map(projectMapper::toDto).toList();
     }
 
+    public List<ProjectResponse> getAllProjectsForAdmin() {
+        log.info("ProjectService.getAllProjectsForAdmin called");
+        List<Project> projects = projectRepository.findAll();
+        return projects.stream().map(projectMapper::toDto).toList();
+    }
+
     public ProjectResponse getProjectById(Long projectId) {
         log.info("ProjectService.getProjectById called id={}", projectId);
         Project project = projectRepository.findById(projectId).orElseThrow();

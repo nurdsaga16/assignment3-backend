@@ -7,6 +7,7 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import com.assignment3.project.entities.User;
+import com.assignment3.project.repositories.UserRepository;
 import com.assignment3.project.security.JwtConfig;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ import java.util.Date;
 public class TokenService {
 
     private final JwtConfig jwtConfig;
+    private final UserRepository userRepository;
 
     public String generateToken(Authentication authentication) {
         var header = new JWSHeader.Builder(jwtConfig.getAlgorithm())
@@ -28,7 +30,11 @@ public class TokenService {
                 .build();
 
         Instant now = Instant.now();
-        User user = (User) authentication.getPrincipal();
+        // Principal is UserDetails (Spring Security User), not our User entity
+        // Get email from principal and load actual User entity from database
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found: " + email));
 
         var claims = new JWTClaimsSet.Builder()
                 .issuer("Codewiz")

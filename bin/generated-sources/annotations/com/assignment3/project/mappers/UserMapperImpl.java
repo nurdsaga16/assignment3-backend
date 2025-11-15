@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-11-15T10:43:00+0500",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.3.jar, environment: Java 25 (Oracle Corporation)"
+    date = "2025-11-15T10:53:44+0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251023-0518, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -22,14 +22,14 @@ public class UserMapperImpl implements UserMapper {
 
         UserResponse userResponse = new UserResponse();
 
-        userResponse.setId( entity.getId() );
-        userResponse.setFullName( entity.getFullName() );
+        userResponse.setAvatarPath( entity.getAvatarPath() );
+        userResponse.setDocPath( entity.getDocPath() );
         userResponse.setEmail( entity.getEmail() );
+        userResponse.setFullName( entity.getFullName() );
+        userResponse.setId( entity.getId() );
         if ( entity.getRole() != null ) {
             userResponse.setRole( entity.getRole().name() );
         }
-        userResponse.setAvatarPath( entity.getAvatarPath() );
-        userResponse.setDocPath( entity.getDocPath() );
         userResponse.setVerified( entity.isVerified() );
 
         return userResponse;
@@ -43,11 +43,11 @@ public class UserMapperImpl implements UserMapper {
 
         User.UserBuilder user = User.builder();
 
-        user.id( dto.getId() );
-        user.fullName( dto.getFullName() );
-        user.email( dto.getEmail() );
         user.avatarPath( dto.getAvatarPath() );
         user.docPath( dto.getDocPath() );
+        user.email( dto.getEmail() );
+        user.fullName( dto.getFullName() );
+        user.id( dto.getId() );
         if ( dto.getRole() != null ) {
             user.role( Enum.valueOf( UserRole.class, dto.getRole() ) );
         }

@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # PostgreSQL база данных
+  postgres:
+    image: postgres:18-alpine
+    container_name: azharfund-postgres
+    environment:
+      POSTGRES_DB: assignment3
+      POSTGRES_USER: azharfund_user
+      POSTGRES_PASSWORD: your_secure_password_here
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U azharfund_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - azharfund-network
+
+  # Spring Boot приложение
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: azharfund-backend
+    environment:
+      # База данных
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/assignment3
+      SPRING_DATASOURCE_USERNAME: azharfund_user
+      SPRING_DATASOURCE_PASSWORD: your_secure_password_here
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      
+      # JPA
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "false"
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "false"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      
+      # JWT
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your_very_secure_secret_key_here_change_this}
+      
+      # Приложение
+      APP_IMAGES_BASE_DIR: /app/images
+      API_VERSION: /api/v1
+      SERVER_PORT: 8080
+      
+      # Java опции
+      JAVA_OPTS: "-Xmx512m -Xms256m"
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - "8080:8080"
+    volumes:
+      # Монтируем директории для изображений
+      - ./images:/app/images
+      - ./avatars:/app/avatars
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - azharfund-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  azharfund-network:
+    driver: bridge
+

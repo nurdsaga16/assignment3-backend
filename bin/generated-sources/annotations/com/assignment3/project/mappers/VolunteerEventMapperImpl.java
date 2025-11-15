@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-11-15T10:42:59+0500",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.3.jar, environment: Java 25 (Oracle Corporation)"
+    date = "2025-11-15T10:53:44+0500",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251023-0518, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class VolunteerEventMapperImpl implements VolunteerEventMapper {
@@ -25,13 +25,13 @@ public class VolunteerEventMapperImpl implements VolunteerEventMapper {
 
         VolunteerEventResponse volunteerEventResponse = new VolunteerEventResponse();
 
-        volunteerEventResponse.setId( entity.getId() );
-        volunteerEventResponse.setTitle( entity.getTitle() );
+        volunteerEventResponse.setCreatedAt( entity.getCreatedAt() );
         volunteerEventResponse.setDescription( entity.getDescription() );
         volunteerEventResponse.setEventDate( entity.getEventDate() );
+        volunteerEventResponse.setId( entity.getId() );
         volunteerEventResponse.setLocation( entity.getLocation() );
         volunteerEventResponse.setOrganizer( userMapper.toDto( entity.getOrganizer() ) );
-        volunteerEventResponse.setCreatedAt( entity.getCreatedAt() );
+        volunteerEventResponse.setTitle( entity.getTitle() );
         volunteerEventResponse.setUpdatedAt( entity.getUpdatedAt() );
 
         volunteerEventResponse.setParticipants( mapParticipants(entity) );

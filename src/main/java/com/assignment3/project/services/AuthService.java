@@ -29,7 +29,11 @@ public class AuthService {
         var authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(input.email(), input.password())
         );
-        var user = (User) authentication.getPrincipal();
+        // Principal is UserDetails (Spring Security User), not our User entity
+        // Get email from principal and load actual User entity from database
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found after authentication"));
         String token = tokenService.generateToken(authentication);
         return new LoginResponse(token, user.getEmail());
     }

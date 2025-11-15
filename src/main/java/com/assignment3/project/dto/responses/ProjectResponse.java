@@ -15,7 +15,6 @@ public class ProjectResponse {
     private CategoryResponse category;
     private long targetAmount;
     private long collectedAmount;
-    
     @JsonProperty("isVerified")
     private boolean isVerified;
 }
